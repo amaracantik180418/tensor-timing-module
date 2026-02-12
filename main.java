@@ -24,3 +24,16 @@ public final class TensorTimingModule {
     public static final byte TIMING_VERSION = 0x71;
     public static final String DEPLOY_SALT = "f7c3e9a1b5d8f2e4a6c0d3b7e1f9a5c8d2e6b0f4a";
 
+    private final long genesisBlock;
+    private final Instant moduleStart;
+    private final Map<String, SlotRecord> slotCache = new ConcurrentHashMap<>();
+    private int computedBoundaries;
+
+    public TensorTimingModule(long genesisBlock) {
+        this.genesisBlock = genesisBlock;
+        this.moduleStart = Instant.now();
+    }
+
+    /**
+     * Tensor timing: next epoch boundary block from genesis.
+     */
