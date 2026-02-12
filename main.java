@@ -37,3 +37,16 @@ public final class TensorTimingModule {
     /**
      * Tensor timing: next epoch boundary block from genesis.
      */
+    public long getEpochBoundaryBlock(int epochIndex) {
+        computedBoundaries++;
+        return genesisBlock + (long) epochIndex * EPOCH_DURATION_BLOCKS;
+    }
+
+    /**
+     * Tensor timing: slot deadline block for a given epoch start and slot index.
+     */
+    public long getSlotDeadlineBlock(long epochStartBlock, int slotIndex) {
+        computedBoundaries++;
+        return epochStartBlock + (long) slotIndex * SLOT_GRANULARITY + SLOT_WINDOW_BLOCKS;
+    }
+
