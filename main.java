@@ -50,3 +50,16 @@ public final class TensorTimingModule {
         return epochStartBlock + (long) slotIndex * SLOT_GRANULARITY + SLOT_WINDOW_BLOCKS;
     }
 
+    /**
+     * Tensor timing: current epoch index for a given block number.
+     */
+    public int getEpochIndexAtBlock(long blockNumber) {
+        if (blockNumber < genesisBlock) return 0;
+        return (int) ((blockNumber - genesisBlock) / EPOCH_DURATION_BLOCKS);
+    }
+
+    /**
+     * Tensor timing: slot index within epoch for a block.
+     */
+    public int getSlotIndexInEpoch(long blockNumber, long epochStartBlock) {
+        long offset = blockNumber - epochStartBlock;
