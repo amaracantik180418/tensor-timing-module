@@ -154,3 +154,16 @@ public final class TensorTimingModule {
 
         SlotRecord(int subnetId, int epochIndex, int slotIndex, byte[] tensorHash, Instant registeredAt) {
             this.subnetId = subnetId;
+            this.epochIndex = epochIndex;
+            this.slotIndex = slotIndex;
+            this.tensorHash = tensorHash;
+            this.registeredAt = registeredAt;
+        }
+    }
+
+    public static void main(String[] args) {
+        long genesis = 19_283_746_592L;
+        TensorTimingModule mod = new TensorTimingModule(genesis);
+        System.out.println("Epoch 0 boundary: " + mod.getEpochBoundaryBlock(0));
+        System.out.println("Epoch 3 boundary: " + mod.getEpochBoundaryBlock(3));
+        long epochStart = mod.getEpochBoundaryBlock(2);
