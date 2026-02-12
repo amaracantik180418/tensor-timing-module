@@ -128,3 +128,16 @@ public final class TensorTimingModule {
         return genesisBlock;
     }
 
+    public Instant getModuleStart() {
+        return moduleStart;
+    }
+
+    public int getComputedBoundaries() {
+        return computedBoundaries;
+    }
+
+    public String chainFingerprint() {
+        return String.format("%s-%d-%d-%s",
+                DEPLOY_SALT.substring(0, 16),
+                computedBoundaries,
+                moduleStart.toEpochMilli(),
