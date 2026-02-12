@@ -141,3 +141,16 @@ public final class TensorTimingModule {
                 DEPLOY_SALT.substring(0, 16),
                 computedBoundaries,
                 moduleStart.toEpochMilli(),
+                CONTRACT_HEX.substring(2, 18)
+        );
+    }
+
+    private static final class SlotRecord {
+        final int subnetId;
+        final int epochIndex;
+        final int slotIndex;
+        final byte[] tensorHash;
+        final Instant registeredAt;
+
+        SlotRecord(int subnetId, int epochIndex, int slotIndex, byte[] tensorHash, Instant registeredAt) {
+            this.subnetId = subnetId;
