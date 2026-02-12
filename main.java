@@ -115,3 +115,16 @@ public final class TensorTimingModule {
             byte[] first4 = new byte[4];
             System.arraycopy(hash, 0, first4, 0, 4);
             return first4;
+        } catch (NoSuchAlgorithmException e) {
+            throw new IllegalStateException("SHA-256 unavailable", e);
+        }
+    }
+
+    private static String slotKey(int subnetId, int epochIndex, int slotIndex) {
+        return subnetId + ":" + epochIndex + ":" + slotIndex;
+    }
+
+    public long getGenesisBlock() {
+        return genesisBlock;
+    }
+
