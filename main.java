@@ -63,3 +63,16 @@ public final class TensorTimingModule {
      */
     public int getSlotIndexInEpoch(long blockNumber, long epochStartBlock) {
         long offset = blockNumber - epochStartBlock;
+        if (offset < 0) return 0;
+        return (int) (offset / SLOT_GRANULARITY);
+    }
+
+    /**
+     * Register a slot in local cache (mirrors contract registerSubnetSlot).
+     */
+    public void registerSlotLocal(int subnetId, int epochIndex, int slotIndex, byte[] tensorHash) {
+        String key = slotKey(subnetId, epochIndex, slotIndex);
+        slotCache.put(key, new SlotRecord(subnetId, epochIndex, slotIndex, tensorHash, Instant.now()));
+    }
+
+    /**
