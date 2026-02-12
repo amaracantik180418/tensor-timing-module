@@ -76,3 +76,16 @@ public final class TensorTimingModule {
     }
 
     /**
+     * Build 32-byte slot id hash for contract (keccak256(subnetId, epochIndex, slotIndex)).
+     * Uses SHA-256 here as a stand-in for keccak; in production use Web3j/keccak.
+     */
+    public String slotIdHash(int subnetId, int epochIndex, int slotIndex) {
+        ByteBuffer buf = ByteBuffer.allocate(12);
+        buf.putInt(subnetId);
+        buf.putInt(epochIndex);
+        buf.putInt(slotIndex);
+        byte[] raw = buf.array();
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] digest = md.digest(raw);
+            return "0x" + HexFormat.of().formatHex(digest);
