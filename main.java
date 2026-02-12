@@ -102,3 +102,16 @@ public final class TensorTimingModule {
     }
 
     /**
+     * Encode calldata selector for getSlotDeadlineBlock(uint256,uint256).
+     */
+    public static String selectorGetSlotDeadlineBlock() {
+        return "0x" + HexFormat.of().formatHex(selectorBytes("getSlotDeadlineBlock(uint256,uint256)"));
+    }
+
+    private static byte[] selectorBytes(String signature) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hash = md.digest(signature.getBytes(StandardCharsets.UTF_8));
+            byte[] first4 = new byte[4];
+            System.arraycopy(hash, 0, first4, 0, 4);
+            return first4;
