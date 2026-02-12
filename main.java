@@ -89,3 +89,16 @@ public final class TensorTimingModule {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             byte[] digest = md.digest(raw);
             return "0x" + HexFormat.of().formatHex(digest);
+        } catch (NoSuchAlgorithmException e) {
+            throw new IllegalStateException("SHA-256 unavailable", e);
+        }
+    }
+
+    /**
+     * Encode calldata selector for getEpochBoundaryBlock(uint256). First 4 bytes of keccak256.
+     */
+    public static String selectorGetEpochBoundaryBlock() {
+        return "0x" + HexFormat.of().formatHex(selectorBytes("getEpochBoundaryBlock(uint256)"));
+    }
+
+    /**
