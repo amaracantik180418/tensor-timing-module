@@ -167,3 +167,8 @@ public final class TensorTimingModule {
         System.out.println("Epoch 0 boundary: " + mod.getEpochBoundaryBlock(0));
         System.out.println("Epoch 3 boundary: " + mod.getEpochBoundaryBlock(3));
         long epochStart = mod.getEpochBoundaryBlock(2);
+        System.out.println("Slot 5 deadline: " + mod.getSlotDeadlineBlock(epochStart, 5));
+        System.out.println("Slot id hash: " + mod.slotIdHash(7, 2, 5));
+        System.out.println("Fingerprint: " + mod.chainFingerprint());
+    }
+}
